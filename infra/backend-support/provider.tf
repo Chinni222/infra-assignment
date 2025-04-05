@@ -1,7 +1,12 @@
-# Setup our aws provider
-variable "region" {
-  default = "eu-west-1"
+variable "aws_role_arn" {
+  description = "IAM Role ARN assumed by CircleCI via OIDC"
+  type        = string
 }
+
 provider "aws" {
-  region = var.region
+  region = "us-west-1"
+
+  assume_role {
+    role_arn = var.aws_role_arn
+  }
 }
